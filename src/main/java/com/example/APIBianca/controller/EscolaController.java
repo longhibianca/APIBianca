@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.APIBianca.repository.EscolaRepo;
 import com.example.APIBianca.model.Escola;
 @RestController
-@RequestMapping(value="/escolas")
+@RequestMapping(value="/api/escolas")
 public class EscolaController 
 {
 	@Autowired

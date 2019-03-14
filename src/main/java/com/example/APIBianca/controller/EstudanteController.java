@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.APIBianca.model.Escola;
 import com.example.APIBianca.model.Estudante;
 import com.example.APIBianca.repository.EstudanteRepo;
 
 @RestController
-@RequestMapping(value="/estudantes")
+@RequestMapping(value="/api/estudantes")
 public class EstudanteController 
 {
 	@Autowired

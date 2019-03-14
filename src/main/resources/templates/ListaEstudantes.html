@@ -1,0 +1,80 @@
+<!DOCTYPE	html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz./thymeleaf/layout"
+	layout:decorator="LayoutPadrao"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+	
+	<head>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	</head>
+
+<section layout:fragment="Conteudo">
+<body>
+
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Estudantes</h1>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbarcollapse-1">
+			<ul class="nav nav-pills navbar-left">
+				<li><a th:href="@{/}">Home</a></li>
+				<li><a th:href="@{/escolas}">Escolas</a></li>
+				<li><a th:href="@{/estudantes}">Estudantes</a></li>										
+			</ul>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" method="POST" th:object="${estudante}"
+				th:action="@{/estudantes}" style="margin: 20px 0">
+				<div class="form-group">
+					<input type="hidden" th:field="*{id}"> 
+					<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" />
+					<input type="text" class="form-control" placeholder="Matricula" th:field="*{matricula}" />
+					<!-- <input type="text" class="form-control" placeholder="Sexo" th:field="*{sexo}" /> -->
+					
+					<select th:field="*{sexo}" class="form-control">
+					    <option th:value="'M'" th:text="Masculino"></option>
+					    <option th:value="'F'" th:text="Feminino"></option>
+					</select>
+					
+					<select class="form-control"  id="escola" th:field="*{escola}">
+							<option th:each="e : ${escolas}" th:value="${e.id}" th:text="${e.nome_fantasia}">
+							</option>
+					</select>				
+					
+					<button type="submit" class="btn btn-primary">Adicionar</button>
+				</div>
+			</form>		
+						
+					
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Matricula</th>
+						<th>Sexo</th>
+						<th>Escola</th>
+						
+						<th colspan=2>Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="estudante : ${estudantes}">
+						<td th:text="${estudante.nome}">Bia</td>
+						<td th:text="${estudante.matricula}">20190005</td>
+						<td th:text="${estudante.sexo}">Feminino</td>
+						<td th:text="${estudante.escola.nome_fantasia}"></td>
+						
+
+						<td><a th:href="@{/estudantes/alterar/}+${estudante.id}" class="glyphicon glyphicon-pencil"></a></td>
+						<td><a th:href="@{/estudantes/excluir/}+${estudante.id}" class="glyphicon glyphicon-trash"></a></td>
+
+					</tr>					
+				</tbody>
+			</table>
+		</div>		
+	</div>
+</body>
+</section>
+</html>
